@@ -1,22 +1,22 @@
 console.log("HelloWorld")
 
 //-----------Constants--------------//
-// playerOne
-// computer
+const deckOfCards = { 
+suits: ['Hearts', 'Diamonds', 'Clubs', 'Spades'],
+values: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+};
+const MAX_CARDS = 51;
 
-const deck = [
-suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'],
-values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-];
-console.log(deck[3]);
+const MIN_CARDS = 1;
 
-
-//drawDeck
+       
 //reserveDeck
 //--------State Variables-----------//
+//let playerOneCards = (deckOfCards * Math.randomIndex)/ 2;
+//console.log(playerOneCards);
 
-
-
+let computerCards = (deckOfCards * Math.randomIndex)/ 2;
+console.log(computerCards);
 //--------Cached Elements-----------//
 
 
@@ -32,5 +32,21 @@ console.log(deck[3]);
 
 
 
-
 //-----------Functions--------------//
+let playerCards = ''
+
+
+//run this as an IF ElSE statement of endGame();
+function playerWin(num) {
+   if (num> MAX_CARDS)
+   return "You Win!"
+}
+
+console.log(playerWin(56));
+
+
+function playerLose(num) {
+   if (num < MIN_CARDS)
+   return "You Lose!"
+}
+console.log(playerLose(0));

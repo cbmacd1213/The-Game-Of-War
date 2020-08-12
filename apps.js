@@ -98,17 +98,17 @@ function endGame(num) {
 function playTurn() { 
     playerCards.forEach(p => {
         compCards.forEach(c => {
-            console.log(p, c)
+            if (p.value === c.value) {
+                console.log("War!")
+                } else if (p.value > c.value)
+                console.log("Computer takes card!")
+                else {
+                (p.value < c.value)
+                console.log("Player takes card!")
+                }
         })
     })
-    if (p === c) {
-    return "War!"
-    } else if (p > c)
-    return "Computer takes card!"
-    else {
-    (p < c)
-    return "Player takes card!"
-    }
+    
     }
     init();
     playTurn();

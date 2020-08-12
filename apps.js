@@ -81,8 +81,6 @@ function shuffleDeck() {
   console.log("SECOND", secondHalf);
 
 
-
-//run this as an IF ElSE statement of endGame();
 function endGame(num) {
    if (num > MAX_CARDS) {
     return "You Win!"
@@ -94,18 +92,43 @@ function endGame(num) {
     }
 }
 
-console.log(endGame(34));
+//console.log(endGame(34));
 
 
-function playTurn() {
-    if (firstHalf[i] === secondHalf[i]) {
+function playTurn() { 
+    playerCards.forEach(p => {
+        compCards.forEach(c => {
+            console.log(p, c)
+        })
+    })
+    if (p === c) {
     return "War!"
-    } else if (firstHalf[i] > secondHalf[i])
+    } else if (p > c)
     return "Computer takes card!"
     else {
-    (firstHalf[i] < secondHalf[i])
+    (p < c)
     return "Player takes card!"
     }
     }
     init();
     playTurn();
+    
+
+
+
+    // playerCards.forEach(k => {
+    //     compCards.forEach(i => {
+    //         console.log(i, k)
+    //     })
+    // })
+
+
+
+    // playerCards.forEach((num, i) => {
+    //     compCards = num[i];
+    //     console.log(num, i)
+    // })
+
+    // compCards.forEach((num, i) => {
+    //     console.log(num, i)
+    // })

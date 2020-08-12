@@ -24,10 +24,6 @@ let deckOfCards = {
     })
   }
 
-let playerCards = [];
-let compCards = [];
-let playerReserve = [];
-let compReserve = [];
 
 
 //--------State Variables-----------//
@@ -35,13 +31,17 @@ let compReserve = [];
 
 
 //--------Cached Elements-----------//
-
-
-
+let playerCards = [];
+let compCards = [];
+let playerReserve = [];
+let compReserve = [];
+let pWarCards = [];
+let cWarCards = [];
 
 
 //---------Event Listeners----------//
-
+document.querySelector('button')
+  .addEventListener('click', playTurn);
 //onClickOfDrawDeck
 //ifMaxCardsisSucceeded
 //ifMinCardsisBested
@@ -56,9 +56,23 @@ function init() {
 }
 
 function render(){
-    
+
 }
 
+function declareWar() {
+    pWarCards = playerCards.slice(0, 2)
+    cWarCards = compCards.slice(0, 2)
+    if (pWarCards[1].value > cWarCards[1].value) {
+    pWarCards.splice(0, 2)
+    cWarCards.splice(0, 2)
+    playerReserve.push()
+    playerReserve.push()
+    } else 
+    pWarCards.splice(0, 2)
+    cWarCards.splice(0, 2)
+    playerReserve.push()
+    playerReserve.push()   
+}
 
 
 function shuffleDeck() {
@@ -89,30 +103,30 @@ function endGame(num) {
     return "Keep playing!"
     }
 }
-endGame(playerCards);
 
 
 function playTurn() {
     playerCards.forEach(p => {
         compCards.forEach(c => {
             if (p.value === c.value) {
-                console.log("War!")
+                return declareWar();
+                // console.log("WAR!")
             } else if (p.value > c.value) {
                 playerCards.shift(p)
                 compCards.shift(c)
                 playerReserve.push(c)
                 playerReserve.push(p)
-                console.log("Computer takes card!")
+                console.log("P takes card!")
             } else (p.value < c.value) 
                 playerCards.shift(p)
                 compCards.shift(c)
                 compReserve.push(p)
                 compReserve.push(c)
-                console.log("Player takes card!")
-                
+                console.log("C takes card!")  
             })
         })
     }
 
     init();
-    playTurn();
+
+ 

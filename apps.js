@@ -59,20 +59,20 @@ function render(){
 
 }
 
-function declareWar() {
-    pWarCards = playerCards.slice(0, 2)
-    cWarCards = compCards.slice(0, 2)
-    if (pWarCards[1].value > cWarCards[1].value) {
-    pWarCards.splice(0, 2)
-    cWarCards.splice(0, 2)
-    playerReserve.push()
-    playerReserve.push()
-    } else 
-    pWarCards.splice(0, 2)
-    cWarCards.splice(0, 2)
-    playerReserve.push()
-    playerReserve.push()   
-}
+// function declareWar(player, comp) {
+//     pWarCards = playerCards.slice(0, 2)
+//     cWarCards = compCards.slice(0, 2)
+//     if (pWarCards[1].value > cWarCards[1].value) {
+//     pWarCards.splice(0, 2)
+//     cWarCards.splice(0, 2)
+//     playerReserve.push()
+//     playerReserve.push()
+//     } else 
+//     pWarCards.splice(0, 2)
+//     cWarCards.splice(0, 2)
+//     playerReserve.push()
+//     playerReserve.push()   
+// }
 
 
 function shuffleDeck() {
@@ -104,29 +104,33 @@ function endGame(num) {
     }
 }
 
-
-function playTurn() {
-    playerCards.forEach(p => {
-        compCards.forEach(c => {
-            if (p.value === c.value) {
-                return declareWar();
-                // console.log("WAR!")
-            } else if (p.value > c.value) {
-                playerCards.shift(p)
-                compCards.shift(c)
-                playerReserve.push(c)
-                playerReserve.push(p)
-                console.log("P takes card!")
-            } else (p.value < c.value) 
-                playerCards.shift(p)
-                compCards.shift(c)
-                compReserve.push(p)
-                compReserve.push(c)
-                console.log("C takes card!")  
-            })
-        })
+    function playTurn() {
+        const player = playerCards[0]
+        const comp = compCards[0]
+        if (player.value > comp.value) {
+            playerCards.shift(player)
+            compCards.shift(comp)
+            playerReserve.push(comp)
+            playerReserve.push(player) 
+            console.log("player", playerReserve) 
+        }  else if (player.value < comp.value) {
+            playerCards.shift(player)
+            compCards.shift(comp)
+            compReserve.push(player)
+            compReserve.push(comp)
+            console.log("computer", compReserve)
+        } else {
+            // return playTurn()
+        }
     }
 
     init();
 
- 
+ function restackPlayerDeck () {
+     if (playerCards.length = 0 && playerReserve)
+     pla
+ }
+
+ function restackCompDeck() {
+
+ }

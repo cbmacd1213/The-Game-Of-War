@@ -26,13 +26,10 @@ let deckOfCards = {
 
 let playerCards = [];
 let compCards = [];
+let playerReserve = [];
+let compReserve = [];
 
 
-
-
-
-       
-//reserveDeck
 //--------State Variables-----------//
 
 
@@ -58,16 +55,17 @@ function init() {
     compCards = secondHalf;
 }
 
+function render(){
+    
+}
+
 
 
 function shuffleDeck() {
-    // Create a copy of the masterDeck (leave masterDeck untouched!)
     const tempDeck = [...masterDeck];
     shuffledDeck = [];
     while (tempDeck.length) {
-      // Get a random index for a card still in the tempDeck
       const rndIdx = Math.floor(Math.random() * tempDeck.length);
-      // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
       let randomCard = tempDeck.splice(rndIdx, 1)[0]
       shuffledDeck.push(randomCard);
     }
@@ -91,44 +89,30 @@ function endGame(num) {
     return "Keep playing!"
     }
 }
+endGame(playerCards);
 
-//console.log(endGame(34));
 
-
-function playTurn() { 
+function playTurn() {
     playerCards.forEach(p => {
         compCards.forEach(c => {
             if (p.value === c.value) {
                 console.log("War!")
-                } else if (p.value > c.value)
+            } else if (p.value > c.value) {
+                playerCards.shift(p)
+                compCards.shift(c)
+                playerReserve.push(c)
+                playerReserve.push(p)
                 console.log("Computer takes card!")
-                else {
-                (p.value < c.value)
+            } else (p.value < c.value) 
+                playerCards.shift(p)
+                compCards.shift(c)
+                compReserve.push(p)
+                compReserve.push(c)
                 console.log("Player takes card!")
-                }
+                
+            })
         })
-    })
-    
     }
+
     init();
     playTurn();
-    
-
-
-
-    // playerCards.forEach(k => {
-    //     compCards.forEach(i => {
-    //         console.log(i, k)
-    //     })
-    // })
-
-
-
-    // playerCards.forEach((num, i) => {
-    //     compCards = num[i];
-    //     console.log(num, i)
-    // })
-
-    // compCards.forEach((num, i) => {
-    //     console.log(num, i)
-    // })

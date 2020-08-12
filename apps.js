@@ -5,7 +5,6 @@ const MAX_CARDS = 51;
 
 const MIN_CARDS = 1;
 
-
 let deckOfCards = {
     suits: ['spades', 'clubs', 'diamonds', 'hearts'],
     values: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
@@ -25,6 +24,8 @@ let deckOfCards = {
     })
   }
 
+let playerCards = [];
+let compCards = [];
 
 
 
@@ -33,6 +34,8 @@ let deckOfCards = {
        
 //reserveDeck
 //--------State Variables-----------//
+
+
 
 //--------Cached Elements-----------//
 
@@ -46,24 +49,15 @@ let deckOfCards = {
 //ifMaxCardsisSucceeded
 //ifMinCardsisBested
 
-
+ 
 
 
 //-----------Functions--------------//
-
-//run this as an IF ElSE statement of endGame();
-function endGame(num) {
-   if (num> MAX_CARDS) {
-    return "You Win!"
-    } else if (num < MIN_CARDS)
-    return "You lose!"
-     else {
-    (num > MIN_CARDS && num < MAX_CARDS)
-    return "Keep playing!"
-    }
+function init() {
+    playerCards = firstHalf; 
+    compCards = secondHalf;
 }
 
-console.log(endGame(34));
 
 
 function shuffleDeck() {
@@ -82,6 +76,36 @@ function shuffleDeck() {
   buildMasterDeck();
   shuffledDeck = shuffleDeck();
   let firstHalf = shuffledDeck.slice(0, 26)
-  let secondHalf = shuffledDeck.slice(26, 51)
+  let secondHalf = shuffledDeck.slice(25, 51)
   console.log("FIRST", firstHalf);
   console.log("SECOND", secondHalf);
+
+
+
+//run this as an IF ElSE statement of endGame();
+function endGame(num) {
+   if (num > MAX_CARDS) {
+    return "You Win!"
+    } else if (num < MIN_CARDS)
+    return "You lose!"
+     else {
+    (num > MIN_CARDS && num < MAX_CARDS)
+    return "Keep playing!"
+    }
+}
+
+console.log(endGame(34));
+
+
+function playTurn() {
+    if (firstHalf[i] === secondHalf[i]) {
+    return "War!"
+    } else if (firstHalf[i] > secondHalf[i])
+    return "Computer takes card!"
+    else {
+    (firstHalf[i] < secondHalf[i])
+    return "Player takes card!"
+    }
+    }
+    init();
+    playTurn();

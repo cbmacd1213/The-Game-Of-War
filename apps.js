@@ -37,7 +37,7 @@ let playerReserve = [];
 let compReserve = [];
 let pWarCards = [];
 let cWarCards = [];
-
+let handReserve = [];
 
 //---------Event Listeners----------//
 document.querySelector('button')
@@ -59,24 +59,8 @@ function render(){
 
 }
 
-// function declareWar(player, comp) {
-//     pWarCards = playerCards.slice(0, 2)
-//     cWarCards = compCards.slice(0, 2)
-//     if (pWarCards[1].value > cWarCards[1].value) {
-//     pWarCards.splice(0, 2)
-//     cWarCards.splice(0, 2)
-//     playerReserve.push()
-//     playerReserve.push()
-//     } else 
-//     pWarCards.splice(0, 2)
-//     cWarCards.splice(0, 2)
-//     playerReserve.push()
-//     playerReserve.push()   
-// }
-
-
-function shuffleDeck() {
-    const tempDeck = [...masterDeck];
+function shuffleDeck(deck) {
+    const tempDeck = [...deck];
     shuffledDeck = [];
     while (tempDeck.length) {
       const rndIdx = Math.floor(Math.random() * tempDeck.length);
@@ -84,13 +68,14 @@ function shuffleDeck() {
       shuffledDeck.push(randomCard);
     }
     return shuffledDeck;
-  }
-  buildMasterDeck();
-  shuffledDeck = shuffleDeck();
-  let firstHalf = shuffledDeck.slice(0, 26)
-  let secondHalf = shuffledDeck.slice(25, 51)
-  console.log("FIRST", firstHalf);
-  console.log("SECOND", secondHalf);
+}
+
+buildMasterDeck();
+shuffledDeck = shuffleDeck(masterDeck);
+let firstHalf = shuffledDeck.slice(0, 26)
+let secondHalf = shuffledDeck.slice(25, 51)
+console.log("FIRST", firstHalf);
+console.log("SECOND", secondHalf);
 
 
 function endGame(num) {
@@ -104,33 +89,72 @@ function endGame(num) {
     }
 }
 
-    function playTurn() {
+function playTurn() {
         const player = playerCards[0]
         const comp = compCards[0]
+        playerCards.shift(player)
+        compCards.shift(comp)
+        handReserve.push(player)
+        handReserve.push(comp)
         if (player.value > comp.value) {
-            playerCards.shift(player)
-            compCards.shift(comp)
-            playerReserve.push(comp)
-            playerReserve.push(player) 
-            console.log("player", playerReserve) 
+            handReserve.forEach(function (card){
+                playerReserve.push(card)
+            }) 
+            handReserve = []
+            restackPlayerDeck()
+            restackCompDeck()
         }  else if (player.value < comp.value) {
-            playerCards.shift(player)
-            compCards.shift(comp)
-            compReserve.push(player)
-            compReserve.push(comp)
-            console.log("computer", compReserve)
+            handReserve.forEach(function (card){
+                compReserve.push(card)
+            })
+            handReserve = []
+            restackPlayerDeck()
+            restackCompDeck()
         } else {
-            // return playTurn()
-        }
+            console.log("war")
+            restackPlayerDeck()
+            restackCompDeck()
+            playTurn()
+        } 
+        console.log("player", playerReserve.length, playerCards.length)
+        console.log("comp", compReserve.length, compCards.length)
     }
+
+    // function declareWar(player, comp) {
+        
+    //     pWarCards = playerCards.unshift(player)
+    //     cWarCards = compCards.unshift(comp)
+    //     if (pWarCards.value > cWarCards.value) {
+    //     pWarCards.shift(player)
+    //     cWarCards.shift(comp)
+    //     playerReserve.push(player)
+    //     playerReserve.push(comp)
+    //     } else 
+    //     pWarCards.shift(player)
+    //     cWarCards.shift(comp)
+    //     compReserve.push(player)
+    //     compReserve.push(comp)   
+    // }
+
+
+
 
     init();
 
- function restackPlayerDeck () {
-     if (playerCards.length = 0 && playerReserve)
-     pla
+ function restackPlayerDeck() {
+     if (playerCards.length === 0 && playerReserve.length > 0) {
+         playerCards = [...playerReserve];
+         shuffleDeck(playerCards)
+         playerReserve = []
+     }
  }
 
  function restackCompDeck() {
-
+    if (compCards.length === 0 && compReserve.length > 0) {
+     compCards = [...compReserve];
+     shuffleDeck(compCards)
+     compReserve = []
+    }
  }
+
+ 

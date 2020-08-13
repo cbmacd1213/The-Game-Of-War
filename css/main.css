@@ -1,0 +1,62 @@
+body {
+    display: grid;
+    margin: 0px;
+    border: 0px;
+    
+ }
+ 
+ .game-area {
+     width: 100vw;
+     height: 100vh;
+     grid-template-columns: 1fr 1fr 1fr 1fr;
+     grid-template-rows: 1fr 1fr 1fr 1fr; 
+     margin: 0px;
+     padding: 0px;
+     border: 0px;
+     background-color: lightgreen;
+ }
+ .row {
+     margin: 0px;
+     padding: 0px;
+     border: 0px;
+ }
+ main {
+     background-color: black;
+     margin: 0px;
+     border: 0px;
+ }
+ td {
+     justify-content: center;
+     align-items: center;
+     background-color: rgb(26, 114, 4);
+     grid-template-columns: 1fr 1fr 1fr 1fr;
+     margin: 0px;
+     padding: 0px;
+     border: 0px;
+ }
+ header {
+     height: 10vh;
+     background-color: lightgray;
+     text-align: center;
+     align-content: center;
+     
+ }
+ h1 {
+     align-self: center;
+     font-family: 'Patua One';
+     font-size: 40px;
+ }
+
+ button {
+     align-self: center;
+     font-size: 20px;
+     height: 50px;
+     width: 100px;
+ }
+
+
+
+
+
+
+ 

@@ -6,8 +6,6 @@ body {
  }
  
  .game-area {
-     width: 100vw;
-     height: 100vh;
      grid-template-columns: 1fr 1fr 1fr 1fr;
      grid-template-rows: 1fr 1fr 1fr 1fr; 
      margin: 0px;
@@ -33,6 +31,8 @@ body {
      margin: 0px;
      padding: 0px;
      border: 0px;
+     height: 420px;
+     width: 100px;
  }
  header {
      height: 10vh;
@@ -54,7 +54,10 @@ body {
      width: 100px;
  }
 
-
+.card-container {
+  height: 100%;
+  width: 100%;
+}
 
 
 

@@ -49,32 +49,62 @@ document.querySelector('button')
 function init() {
     playerCards = firstHalf; 
     compCards = secondHalf;
+     renderPlayerCards();
+     renderCompCards()
+    // renderCompReserve()
+    // renderPWarCards()
+    // renderCWarCards()
+    // renderHandReserve()
 }
 
-function renderShuffledDeck() {
-    // Create a copy of the masterDeck (leave masterDeck untouched!)
-    const tempDeck = [...masterDeck];
-    shuffledDeck = [];
-    while (tempDeck.length) {
-      // Get a random index for a card still in the tempDeck
-      const rndIdx = Math.floor(Math.random() * tempDeck.length);
-      // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
-      shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
-    }
-    renderDeckInContainer(shuffledDeck, shuffledContainer);
-  }
+function renderPlayerCards() {
+   if (playerCards.length > 0) {
+    document.getElementById('pDrawCards').style.background = `url("css/card-deck-css/images/backs/red.svg") no-repeat center center`
+   } else {
+    document.getElementById('pDrawCards').style.background = ''
+   }
+}
+function renderCompCards() {
+    if (compCards.length > 0) {
+        document.getElementById('cDrawCards').style.background = `url("css/card-deck-css/images/backs/red.svg") no-repeat center center`
+    } else {
+        document.getElementById('cDrawCards').style.background = ''
+       }
+}
+function renderPlayerReserve() {
+    let pInPlay = document.getElementById('pCardsWon')
+    let cInPlay = document.getElementById('cCardsWon')
+    let playerCard = playerReserve[playerReserve.length - 1]
+    let compCard = compReserve[compReserve.length - 1]
+    pInPlay.style.background = `url("css/card-deck-css/images/${playerCard.suit}/${playerCard.suit}-${playerCard.value}.svg") no-repeat center center`
+    cInPlay.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
+}
+function renderCompReserve() {
+    compReserve.forEach(function(cardObj, idx){
+        cardObj.style.background = lookup[cardObj]
+    })
+}
+function renderPWarCards() {
+    pWarCards.forEach(function(cardObj, idx){
+        cardObj.style.background = lookup[cardObj]
+    })
+}
+function renderCWarCards() {
+    cWarCards.forEach(function(cardObj, idx){
+        cardObj.style.background = lookup[cardObj]
+    })
+}
+function renderHandReserve() {
+    let pInPlay = document.getElementById('pInPlayCards')
+    let cInPlay = document.getElementById('cInPlayCards')
+    let playerCard = playerCards[0]
+    let compCard = compCards[0]
+    pInPlay.style.background = `url("css/card-deck-css/images/${playerCard.suit}/${playerCard.suit}-${playerCard.value}.svg") no-repeat center center`
+    cInPlay.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
+}
 
 
-  function renderDeckInContainer(deck, container) {
-    container.innerHTML = '';
-    // Let's build the cards as a string of HTML
-    // Use reduce when you want to 'reduce' the array into a single thing - in this case a string of HTML markup 
-    const cardsHtml = deck.reduce(function(html, card) {
-      return html + `<div class="card ${card.face}"></div>`;
-    }, '');
-    container.innerHTML = cardsHtml;
-  }
-
+  
 function shuffleDeck(deck) {
     const tempDeck = [...deck];
     shuffledDeck = [];
@@ -108,6 +138,7 @@ function endGame(num) {
 function playTurn() {
         const player = playerCards[0]
         const comp = compCards[0]
+        renderHandReserve()
         playerCards.shift(player)
         compCards.shift(comp)
         handReserve.push(player)
@@ -117,6 +148,8 @@ function playTurn() {
                 playerReserve.push(card)
             }) 
             handReserve = []
+            renderHandReserve()
+            renderPlayerReserve()
             restackPlayerDeck()
             restackCompDeck()
         }  else if (player.value < comp.value) {
@@ -124,16 +157,21 @@ function playTurn() {
                 compReserve.push(card)
             })
             handReserve = []
+            renderHandReserve()
+            renderPlayerReserve()
             restackPlayerDeck()
             restackCompDeck()
         } else {
             console.log("war")
+            renderPlayerReserve()
             restackPlayerDeck()
             restackCompDeck()
             playTurn()
         } 
         console.log("player", playerReserve.length, playerCards.length)
         console.log("comp", compReserve.length, compCards.length)
+        renderPlayerCards()
+        renderCompCards()
     }
 
     init();
@@ -157,13 +195,3 @@ function playTurn() {
  }
 
  
-
- function renderCardsWon(deck, container) {
-    container.innerHTML = '';
-    // Let's build the cards as a string of HTML
-    // Use reduce when you want to 'reduce' the array into a single thing - in this case a string of HTML markup 
-    const cardsHtml = deck.reduce(function(html, card) {
-      return html + `<div class="card ${card.face}"></div>`;
-    }, '');
-    container.innerHTML = cardsHtml;
-  }

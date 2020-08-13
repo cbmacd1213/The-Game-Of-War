@@ -52,7 +52,7 @@ function init() {
      renderPlayerCards();
      renderCompCards()
     // renderCompReserve()
-    // renderPWarCards()
+//    renderPWarCards()
     // renderCWarCards()
     // renderHandReserve()
 }
@@ -72,28 +72,27 @@ function renderCompCards() {
        }
 }
 function renderPlayerReserve() {
-    let pInPlay = document.getElementById('pCardsWon')
-    let cInPlay = document.getElementById('cCardsWon')
+    let pReserve = document.getElementById('pCardsWon')
     let playerCard = playerReserve[playerReserve.length - 1]
-    let compCard = compReserve[compReserve.length - 1]
-    pInPlay.style.background = `url("css/card-deck-css/images/${playerCard.suit}/${playerCard.suit}-${playerCard.value}.svg") no-repeat center center`
-    cInPlay.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
+    pReserve.style.background = `url("css/card-deck-css/images/${playerCard.suit}/${playerCard.suit}-${playerCard.value}.svg") no-repeat center center`
+    
 }
+
 function renderCompReserve() {
-    compReserve.forEach(function(cardObj, idx){
-        cardObj.style.background = lookup[cardObj]
-    })
+    let cReserve= document.getElementById('cCardsWon')
+    let compCard = compReserve[compReserve.length - 1]
+    cReserve.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
 }
-function renderPWarCards() {
-    pWarCards.forEach(function(cardObj, idx){
-        cardObj.style.background = lookup[cardObj]
-    })
-}
-function renderCWarCards() {
-    cWarCards.forEach(function(cardObj, idx){
-        cardObj.style.background = lookup[cardObj]
-    })
-}
+
+// function renderPWarCards() {
+//     let pWarCard = document.getElementById('pWarCards')
+//     let cWarCard = document.getElementById('cWarCards')
+//     let playerCard = playerReserve[playerReserve.length - 1]
+//     let compCard = compReserve[compReserve.length - 1]
+//     pWarCard.style.background = `url("css/card-deck-css/images/${playerCard.suit}/${playerCard.suit}-${playerCard.value}.svg") no-repeat center center`
+//     cWarCard.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
+// }
+
 function renderHandReserve() {
     let pInPlay = document.getElementById('pInPlayCards')
     let cInPlay = document.getElementById('cInPlayCards')
@@ -148,7 +147,7 @@ function playTurn() {
                 playerReserve.push(card)
             }) 
             handReserve = []
-            renderHandReserve()
+            // renderHandReserve()
             renderPlayerReserve()
             restackPlayerDeck()
             restackCompDeck()
@@ -157,10 +156,11 @@ function playTurn() {
                 compReserve.push(card)
             })
             handReserve = []
-            renderHandReserve()
-            renderPlayerReserve()
+            // renderHandReserve()
+            renderCompReserve()
             restackPlayerDeck()
             restackCompDeck()
+            
         } else {
             console.log("war")
             renderPlayerReserve()

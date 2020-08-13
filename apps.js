@@ -1,5 +1,3 @@
-console.log("HelloWorld")
-
 //-----------Constants--------------//
 const MAX_CARDS = 51;
 
@@ -27,10 +25,6 @@ let deckOfCards = {
 
 
 //--------State Variables-----------//
-
-
-
-//--------Cached Elements-----------//
 let playerCards = [];
 let compCards = [];
 let playerReserve = [];
@@ -39,16 +33,18 @@ let pWarCards = [];
 let cWarCards = [];
 let handReserve = [];
 
+//--------Cached Elements-----------//
+const cardsWon = document.getElementById('cardsWon')
+const drawCards = document.getElementById('drawCards')
+const cardsInPlay = document.getElementById('cardsInPlay')
+const warCards = document.getElementById('warCards')
+
+
+
+
 //---------Event Listeners----------//
 document.querySelector('button')
   .addEventListener('click', playTurn);
-//onClickOfDrawDeck
-//ifMaxCardsisSucceeded
-//ifMinCardsisBested
-
- 
-
-
 //-----------Functions--------------//
 function init() {
     playerCards = firstHalf; 
@@ -120,25 +116,6 @@ function playTurn() {
         console.log("comp", compReserve.length, compCards.length)
     }
 
-    // function declareWar(player, comp) {
-        
-    //     pWarCards = playerCards.unshift(player)
-    //     cWarCards = compCards.unshift(comp)
-    //     if (pWarCards.value > cWarCards.value) {
-    //     pWarCards.shift(player)
-    //     cWarCards.shift(comp)
-    //     playerReserve.push(player)
-    //     playerReserve.push(comp)
-    //     } else 
-    //     pWarCards.shift(player)
-    //     cWarCards.shift(comp)
-    //     compReserve.push(player)
-    //     compReserve.push(comp)   
-    // }
-
-
-
-
     init();
 
  function restackPlayerDeck() {
@@ -146,6 +123,7 @@ function playTurn() {
          playerCards = [...playerReserve];
          shuffleDeck(playerCards)
          playerReserve = []
+         shuffleDeck(playerCards)
      }
  }
 
@@ -154,7 +132,18 @@ function playTurn() {
      compCards = [...compReserve];
      shuffleDeck(compCards)
      compReserve = []
+     shuffleDeck(compCards)
     }
  }
 
  
+
+ function renderCardsWon(deck, container) {
+    container.innerHTML = '';
+    // Let's build the cards as a string of HTML
+    // Use reduce when you want to 'reduce' the array into a single thing - in this case a string of HTML markup 
+    const cardsHtml = deck.reduce(function(html, card) {
+      return html + `<div class="card ${card.face}"></div>`;
+    }, '');
+    container.innerHTML = cardsHtml;
+  }

@@ -144,9 +144,6 @@ function playTurn() {
       handReserve = []
     }
   }
-    
-    
-
     init();
  function restackPlayerDeck() {
      if (playerCards.length === 0 && playerReserve.length > 0) {

@@ -2,6 +2,7 @@ body {
     display: grid;
     margin: 0px;
     border: 0px;
+    color: lightsteelblue;
     
  }
 
@@ -11,7 +12,7 @@ body {
      margin: 0px;
      padding: 0px;
      border: 0px;
-     background-color: rgb(133, 133, 133);
+     background-color: blue;
  }
  
  .row {
@@ -20,14 +21,14 @@ body {
      border: 0px;
  }
  main {
-     background-color: black;
+     background-color: lightsteelblue;
      margin: 0px;
      border: 0px;
  }
  td {
      justify-content: center;
      align-items: center;
-     background-color: lightgray;
+     background-color: lightsteelblue;
      grid-template-columns: 1fr 1fr 1fr 1fr;
      margin: 0px;
      padding: 0px;
@@ -37,7 +38,7 @@ body {
  }
  header {
      height: 10vh;
-     background-color: rgb(207, 46, 46);
+     background-color: blue;
      text-align: center;
      align-content: center;
      
@@ -65,7 +66,7 @@ span {
 }
 
 footer {
-  background-color: rgb(207, 46, 46);
+  background-color: blue;
   display: flex;
   align-content: center;
 }

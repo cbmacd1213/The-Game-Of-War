@@ -28,6 +28,7 @@ let pWarCards = [];
 let cWarCards = [];
 let handReserve = [];
 let turn = 0;
+let showResult = document.querySelector('span');
 //--------Cached Elements-----------//
 const cardsWon = document.getElementById('cardsWon')
 const drawCards = document.getElementById('drawCards')
@@ -42,10 +43,6 @@ function init() {
     compCards = secondHalf;
      renderPlayerCards();
      renderCompCards()
-    // renderCompReserve()
-//    renderPWarCards()
-    // renderCWarCards()
-    // renderHandReserve()
 }
 function renderPlayerCards() {
    if (playerCards.length > 0) {
@@ -96,8 +93,6 @@ buildMasterDeck();
 shuffledDeck = shuffleDeck(masterDeck);
 let firstHalf = shuffledDeck.slice(0, 26)
 let secondHalf = shuffledDeck.slice(25, 51)
-console.log("FIRST", firstHalf);
-console.log("SECOND", secondHalf);
 function endGame(num) {
    if (num > MAX_CARDS) {
     return "You Win!"
@@ -139,8 +134,7 @@ function playTurn() {
           restackPlayerDeck()
           restackCompDeck()
       }
-      console.log("player reserve length:", playerReserve.length, "player cards length:", playerCards.length)
-      console.log("comp reserve length:", compReserve.length, "comp cards length:", compCards.length)
+      showResult.textContent = `  The player has ${playerCards.length} in their hand and ${playerReserve.length} in their reserve and the computer has ${compCards.length} in their hand and ${compReserve.length} in their reserve`
       renderPlayerCards()
       renderCompCards()
       handReserve = []

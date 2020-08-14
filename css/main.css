@@ -71,7 +71,6 @@ footer {
   align-content: center;
 }
 
-#theScores {
-  align-content: right;
+span {
+  justify-content: center;
 }
- 

@@ -71,15 +71,18 @@ function renderCompReserve() {
     let compCard = compReserve[compReserve.length - 1]
     cReserve.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
 }
-// function renderWarCards() {
-//     let pWarCard = document.getElementById('pWarCards')
-//     let cWarCard = document.getElementById('cWarCards')
-//     let playerCard = playerReserve[playerReserve.length - 1]
-//     let compCard = compReserve[compReserve.length - 1]
-//     pWarCard.style.background = `url("css/card-deck-css/images/${playerCard.suit}/${playerCard.suit}-${playerCard.value}.svg") no-repeat center center`
-//     cWarCard.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
-// }
+function renderWarCards() {
+    let pWarCard = document.getElementById('pWarCards')
+    let cWarCard = document.getElementById('cWarCards')
+    let playerCard = playerReserve[playerReserve.length - 1]
+    let compCard = compReserve[compReserve.length - 1]
+    pWarCard.style.background = `url("css/card-deck-css/images/${playerCard.suit}/${playerCard.suit}-${playerCard.value}.svg") no-repeat center center`
+    cWarCard.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
+}
+
 function renderHandReserve() {
+    restackCompDeck()
+    restackPlayerDeck()
     let pInPlay = document.getElementById('pInPlayCards')
     let cInPlay = document.getElementById('cInPlayCards')
     let playerCard = playerCards[0]
@@ -115,34 +118,41 @@ function endGame(num) {
 }
 function playTurn() {
   if (turn === 0) {
-    console.log("First Turn");
     const player = playerCards.shift()
     const comp = compCards.shift()
     renderHandReserve()
     turn += 1;
   } else {
-    console.log("Other turns");
+    pWarCards = []
+    cWarCards = []
     const player = playerCards.shift()
     const comp = compCards.shift()
     renderHandReserve()
     if (player.value > comp.value) {
+        pWarCards.shift()
+        cWarCards.shift()
         handReserve.push(comp)
         handReserve.push(player)
         handReserve.forEach(function (card){
             playerReserve.push(card)
         })
-        handReserve = []
         renderPlayerReserve()
+        restackPlayerDeck()
+        restackCompDeck()
     }  else if (player.value < comp.value) {
+        pWarCards.shift()
+        cWarCards.shift()
         handReserve.push(player)
         handReserve.push(comp)
         handReserve.forEach(function (card){
             compReserve.push(card)
         })
-        handReserve = []
         renderCompReserve()
+        restackPlayerDeck()
+        restackCompDeck()
     } else {
         console.log("war")
+        renderWarCards()
         renderPlayerReserve()
         restackPlayerDeck()
         restackCompDeck()
@@ -152,8 +162,14 @@ function playTurn() {
     console.log("comp reserve length:", compReserve.length, "comp cards length:", compCards.length)
     renderPlayerCards()
     renderCompCards()
+    handReserve = []
+    pWarCards = []
+    cWarCards = []
   }
 }
+    
+    
+
     init();
  function restackPlayerDeck() {
      if (playerCards.length === 0 && playerReserve.length > 0) {
@@ -169,5 +185,7 @@ function playTurn() {
      shuffleDeck(compCards)
      compReserve = []
      shuffleDeck(compCards)
+        }
     }
- }
+
+

@@ -12,3 +12,6 @@ One button will click through and deal the cards for each turn
 Icebox items include:
 Adding a sleeker more refined design
 Getting the multiple card War feature with different face down and face up settings.
+
+Follow the link to play!
+https://cbmacd1213.github.io/The-Game-Of-War/

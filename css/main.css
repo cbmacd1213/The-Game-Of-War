@@ -4,7 +4,7 @@ body {
     border: 0px;
     
  }
- 
+
  .game-area {
      grid-template-columns: 1fr 1fr 1fr 1fr;
      grid-template-rows: 1fr 1fr 1fr 1fr; 
@@ -13,6 +13,7 @@ body {
      border: 0px;
      background-color: rgb(133, 133, 133);
  }
+ 
  .row {
      margin: 0px;
      padding: 0px;
@@ -36,7 +37,7 @@ body {
  }
  header {
      height: 10vh;
-     background-color: lightgray;
+     background-color: rgb(207, 46, 46);
      text-align: center;
      align-content: center;
      

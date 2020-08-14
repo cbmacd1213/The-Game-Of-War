@@ -1,5 +1,5 @@
 //-----------Constants--------------//
-const MAX_CARDS = 51;
+const MAX_CARDS = 50;
 const MIN_CARDS = 1;
 let deckOfCards = {
     suits: ['spades', 'clubs', 'diamonds', 'hearts'],
@@ -98,12 +98,7 @@ let secondHalf = shuffledDeck.slice(25, 51)
 
 function endGame(num) {
    if (playerReserve.length + playerCards.length > MAX_CARDS || compReserve.length + compCards.length > MAX_CARDS) {
-    endGameMessage = `We have a winner!`
-    } else if (playerReserve.length + playerCards.length < MIN_CARDS || compReserve.length + compCards.length < MIN_CARDS)
-    return ("and we have a loser!")
-     else {
-    (num > MIN_CARDS && num < MAX_CARDS)
-    return "Keep playing!"
+    endGameMessage.textContent = `We have a winner!`
     }
 }
 function playTurn() {
@@ -138,7 +133,7 @@ function playTurn() {
           restackCompDeck()
           endGame()
       }
-      showResult.textContent = `  The player has ${playerCards.length} in their hand and ${playerReserve.length} in their reserve and the computer has ${compCards.length} in their hand and ${compReserve.length} in their reserve`
+      showResult.textContent = ` The player has ${playerCards.length} in their hand and ${playerReserve.length} in their reserve and the computer has ${compCards.length} in their hand and ${compReserve.length} in their reserve`
       renderPlayerCards()
       renderCompCards()
       handReserve = []

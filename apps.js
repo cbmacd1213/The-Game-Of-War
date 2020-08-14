@@ -29,6 +29,7 @@ let cWarCards = [];
 let handReserve = [];
 let turn = 0;
 let showResult = document.querySelector('span');
+let endGameMessage = document.getElementById('endGame')
 //--------Cached Elements-----------//
 const cardsWon = document.getElementById('cardsWon')
 const drawCards = document.getElementById('drawCards')
@@ -79,6 +80,7 @@ function renderHandReserve() {
     pInPlay.style.background = `url("css/card-deck-css/images/${playerCard.suit}/${playerCard.suit}-${playerCard.value}.svg") no-repeat center center`
     cInPlay.style.background = `url("css/card-deck-css/images/${compCard.suit}/${compCard.suit}-${compCard.value}.svg") no-repeat center center`
 }
+
 function shuffleDeck(deck) {
     const tempDeck = [...deck];
     shuffledDeck = [];
@@ -93,11 +95,12 @@ buildMasterDeck();
 shuffledDeck = shuffleDeck(masterDeck);
 let firstHalf = shuffledDeck.slice(0, 26)
 let secondHalf = shuffledDeck.slice(25, 51)
+
 function endGame(num) {
-   if (num > MAX_CARDS) {
-    return "You Win!"
-    } else if (num < MIN_CARDS)
-    return "You lose!"
+   if (playerReserve.length + playerCards.length > MAX_CARDS || compReserve.length + compCards.length > MAX_CARDS) {
+    endGameMessage = `We have a winner!`
+    } else if (playerReserve.length + playerCards.length < MIN_CARDS || compReserve.length + compCards.length < MIN_CARDS)
+    return ("and we have a loser!")
      else {
     (num > MIN_CARDS && num < MAX_CARDS)
     return "Keep playing!"
@@ -133,6 +136,7 @@ function playTurn() {
           renderCompReserve()
           restackPlayerDeck()
           restackCompDeck()
+          endGame()
       }
       showResult.textContent = `  The player has ${playerCards.length} in their hand and ${playerReserve.length} in their reserve and the computer has ${compCards.length} in their hand and ${compReserve.length} in their reserve`
       renderPlayerCards()

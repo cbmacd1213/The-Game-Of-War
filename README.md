@@ -1,7 +1,6 @@
 The Friendly Game Of War
 
-<img src="https://imgur.com/dBWzWLK"/>
-
+<img src="/Users/colinsmacbook/code/The-Game-Of-War/wireframe and pseudocode/Friendly game of war.png">
 
 A streamlined version of the classic card game. No shuffling, dealing or counting required, the computer will do it all for you. 
 In this version, if the drawn cards are equal the computer will yeild to the player giving them a slight advantage.. this isn't a Vegas card game!
